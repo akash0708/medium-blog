@@ -5,12 +5,14 @@ import Signin from "./pages/Signin";
 import Signup from "./pages/Signup";
 import Blogs from "./pages/Blogs";
 import Publish from "./pages/Publish";
+import Landing from "./pages/Landing";
 
 function App() {
   return (
     <>
       <BrowserRouter>
         <Routes>
+          <Route path="/" element={<Landing />} />
           <Route path="/signin" element={<Signin />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/blogs" element={<Blogs />} />

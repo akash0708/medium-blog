@@ -5,6 +5,7 @@ import axios from "axios";
 
 const Auth = ({ type }: { type: "signup" | "signin" }) => {
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
   const [postInput, setPostInput] = useState<SignupInput>({
     name: "",
     email: "",
@@ -13,6 +14,7 @@ const Auth = ({ type }: { type: "signup" | "signin" }) => {
 
   async function sendRequest() {
     try {
+      setLoading(true);
       const response = await axios.post(
         `${import.meta.env.VITE_BACKEND_URL}/user/${type}`,
         postInput
@@ -22,6 +24,8 @@ const Auth = ({ type }: { type: "signup" | "signin" }) => {
       navigate("/blogs");
     } catch (err) {
       console.log(err);
+    } finally {
+      setLoading(false);
     }
   }
 
@@ -72,7 +76,10 @@ const Auth = ({ type }: { type: "signup" | "signin" }) => {
         />
         <button
           onClick={sendRequest}
-          className="bg-black text-white py-2 rounded-lg mt-4"
+          disabled={loading}
+          className={`${
+            loading ? "opacity-60" : "opacity-100"
+          } bg-black text-white py-2 rounded-lg mt-4`}
         >
           {type === "signin" ? "Sign in" : "Sign Up"}
         </button>

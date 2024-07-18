@@ -23,6 +23,7 @@ export default function Blogs() {
       <div className="w-full flex flex-col items-center">
         {blogs.map((blog) => (
           <BlogCard
+            key={blog.id}
             authorName={blog.author.name || "Anonymous"}
             title={blog.title}
             content={blog.content}
